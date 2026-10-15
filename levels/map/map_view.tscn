@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://cfgkftkljcrx8"]
+
+[ext_resource type="Script" uid="uid://bnoo7kk27m5ge" path="res://levels/map/map_view.gd" id="1"]
+[ext_resource type="Script" uid="uid://bv86w05aqq3jj" path="res://levels/map/map_canvas.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://brmhxurtkng60" path="res://levels/map/map_node_button.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://b43bca4345dfh" path="res://assets/sprites/ui/map_background.png" id="3_me3sr"]
+
+[node name="MapView" type="Control" unique_id=772385787]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+node_button_scene = ExtResource("3")
+
+[node name="Background" type="NinePatchRect" parent="." unique_id=500000010]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_me3sr")
+region_rect = Rect2(15, 9, 194, 127)
+
+[node name="Scroll" type="ScrollContainer" parent="." unique_id=368489856]
+unique_name_in_owner = true
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Content" type="Control" parent="Scroll" unique_id=1938780875]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2")
+
+[node name="Hud" type="MarginContainer" parent="." unique_id=1600799749]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+
+[node name="HBox" type="HBoxContainer" parent="Hud" unique_id=1989451108]
+layout_mode = 2
+alignment = 2
+
+[node name="ScrapLabel" type="Label" parent="Hud/HBox" unique_id=1537720450]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Scrap: 0"

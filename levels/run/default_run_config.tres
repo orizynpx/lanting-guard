@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RunConfig" format=3 uid="uid://cfm4mav3oldo2"]
+
+[ext_resource type="Script" uid="uid://e6u8ip5ysdy3" path="res://levels/run/run_config.gd" id="1_q5xdy"]
+[ext_resource type="Script" uid="uid://4myxj6bva4mf" path="res://cards/card_resource.gd" id="2_o1gm6"]
+[ext_resource type="Resource" uid="uid://cf6k86fw0cgfw" path="res://cards/units/jukung_wall.tres" id="3_e56sm"]
+[ext_resource type="Resource" uid="uid://b8ybvjsitwb7k" path="res://cards/units/jukung_striker.tres" id="4_bnqko"]
+[ext_resource type="Resource" uid="uid://bjlhf83jeqx15" path="res://cards/units/jukung_sumpit.tres" id="5_as33y"]
+[ext_resource type="Resource" uid="uid://ccnhm50hxqfga" path="res://cards/items/lunta.tres" id="6_8k62b"]
+[ext_resource type="Resource" uid="uid://gip7dij4f5nm" path="res://cards/items/palureka.tres" id="7_pkuob"]
+[ext_resource type="Resource" uid="uid://b0d2kcymyygvh" path="res://cards/items/bola_lumpur.tres" id="8_dlkas"]
+[ext_resource type="Resource" uid="uid://eqttexr50hjj" path="res://cards/items/hujan_damak.tres" id="9_g2kuf"]
+
+[resource]
+script = ExtResource("1_q5xdy")
+starting_deck = Array[ExtResource("2_o1gm6")]([ExtResource("3_e56sm"), ExtResource("4_bnqko"), ExtResource("5_as33y"), ExtResource("6_8k62b"), ExtResource("7_pkuob"), ExtResource("8_dlkas"), ExtResource("9_g2kuf")])
+metadata/_custom_type_script = "uid://cm2upe8lfs8rv"

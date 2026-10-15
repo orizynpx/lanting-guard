@@ -8,16 +8,52 @@
 
 config_version=5
 
+[animation]
+
+warnings/check_invalid_track_paths=false
+
 [application]
 
 config/name="Lanting Guard"
+run/main_scene="uid://bmdu0uuqgqkx0"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://cd33cdomlapjt"
+
+[autoload]
+
+AppConfig="*uid://cjke6crjg14a0"
+SceneLoader="*uid://cbwmrnp0af35y"
+ProjectMusicController="*uid://r5t485lr3p7t"
+ProjectUISoundController="*uid://cc37235kj4384"
+
 [display]
 
+window/size/viewport_width=1600
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/maaacks_game_template/plugin.cfg")
+
+[global_group]
+
+Base=""
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://addons/maaacks_game_template/base/translations/menus_translations.en.translation", "res://addons/maaacks_game_template/base/translations/menus_translations.fr.translation")
+
+[maaacks_game_template]
+
+disable_install_audio_busses=true
+disable_update_check=false
+disable_install_wizard=true
+copy_path="res://"
 
 [physics]
 
@@ -25,5 +61,7 @@ window/stretch/aspect="expand"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

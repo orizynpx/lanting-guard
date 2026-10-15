@@ -1,0 +1,101 @@
+class_name HandUI
+extends HBoxContainer
+
+signal card_play_requested(card : CardResource, drop_global_position : Vector2, card_ui : CardUI)
+signal card_drag_started(card : CardResource, global_position : Vector2)
+signal card_drag_updated(card : CardResource, global_position : Vector2)
+signal card_drag_ended(card : CardResource)
+
+
+@export var card_ui_scene : PackedScene
+@export var hand_size : int = 4
+
+var deck : Deck
+var drag_layer : Node = null
+var _card_uis : Array[CardUI] = []
+var  _unit_card_uis : Array[CardUI] = []
+
+func setup(new_deck : Deck, new_drag_layer : Node = null) -> void:
+	deck = new_deck
+	drag_layer = new_drag_layer
+	_spawn_unit_cards()
+	refill_hand()
+
+func _spawn_unit_cards() -> void:
+	for card in deck.get_unit_pool():
+		var ui := create_card_ui(card)
+		_unit_card_uis.append(ui)
+
+func refill_hand() -> void:
+	if deck.active_type() != CardResource.CardType.ITEM:
+		return
+	while _card_uis.size() < hand_size:
+		if deck.draw_count() == 0 and _card_uis.is_empty():
+			deck.reshuffle_if_hand_empty(deck.active_type())
+		var card : CardResource = deck.draw_card()
+		if card == null:
+			break
+		_card_uis.append(create_card_ui(card))
+
+func create_card_ui(card : CardResource) -> CardUI:
+	var ui : CardUI = card_ui_scene.instantiate()
+	add_child(ui)
+	ui.setup(card)
+	ui.drag_layer = drag_layer
+	ui.drag_started.connect(_on_card_drag_started)
+	ui.drag_updated.connect(_on_card_drag_updated)
+	ui.drag_ended.connect(_on_card_drag_ended)
+	return ui
+
+func _on_card_drag_started(card_ui : CardUI, global_position : Vector2) -> void:
+	card_drag_started.emit(card_ui.card, global_position)
+
+func _on_card_drag_updated(card_ui : CardUI, global_position : Vector2) -> void:
+	card_drag_updated.emit(card_ui.card, global_position)
+
+func _on_card_drag_ended(card_ui : CardUI, drop_global_position : Vector2) -> void:
+	card_drag_ended.emit(card_ui.card)
+	card_play_requested.emit(card_ui.card, drop_global_position, card_ui)
+
+func confirm_play(card_ui : CardUI) -> void:
+	if card_ui in _unit_card_uis:
+		card_ui.return_to_hand()
+		return
+	_card_uis.erase(card_ui)
+	deck.discard(card_ui.card)
+	card_ui.queue_free()
+	refill_hand()
+
+func cancel_play(card_ui : CardUI) -> void:
+	card_ui.return_to_hand()
+
+func set_playable_type(type : int) -> void:
+	for ui in _card_uis:
+		ui.set_playable(ui.card.type == type)
+	for ui in _unit_card_uis:
+		ui.set_playable(ui.card.type == type)
+
+func get_cards_in_hand() -> Array[CardResource]:
+	var result : Array[CardResource] = []
+	for ui in _card_uis:
+		result.append(ui.card)
+	return result
+
+func discard_cards_of_type(type : int) -> void:
+	if type == CardResource.CardType.UNIT:
+		for ui in _unit_card_uis:
+			ui.visible = false
+		return
+	
+	var remaining : Array[CardUI] = []
+	for ui in _card_uis:
+		if ui.card.type == type:
+			deck.discard(ui.card)
+			ui.queue_free()
+		else:
+			remaining.append(ui)
+	_card_uis = remaining
+
+func show_unit_cards() -> void:
+	for ui in _unit_card_uis:
+		ui.visible = true

@@ -1,0 +1,208 @@
+[gd_scene format=3 uid="uid://d4icm3r4uj5c1"]
+
+[ext_resource type="Script" uid="uid://tiqelwol3rht" path="res://scenes/game_scene/stage/combat_stage.gd" id="1_nsbd3"]
+[ext_resource type="PackedScene" uid="uid://dtkys06b2d0rd" path="res://entities/enemies/enemy_entity.tscn" id="2_1ha27"]
+[ext_resource type="Script" uid="uid://4myxj6bva4mf" path="res://cards/card_resource.gd" id="3_6mew0"]
+[ext_resource type="Resource" uid="uid://b8ybvjsitwb7k" path="res://cards/units/jukung_striker.tres" id="4_dfy8o"]
+[ext_resource type="Resource" uid="uid://bjlhf83jeqx15" path="res://cards/units/jukung_sumpit.tres" id="5_vi1cd"]
+[ext_resource type="Resource" uid="uid://eqttexr50hjj" path="res://cards/items/hujan_damak.tres" id="6_oe8jj"]
+[ext_resource type="Script" uid="uid://bc7u4jeva5705" path="res://scenes/game_scene/tutorial_manager.gd" id="7_0blov"]
+[ext_resource type="Resource" uid="uid://gip7dij4f5nm" path="res://cards/items/palureka.tres" id="7_vi1cd"]
+[ext_resource type="PackedScene" uid="uid://dpfqgt58nq4hm" path="res://scenes/game_scene/tutorials/tutorial_1.tscn" id="8_b4aor"]
+[ext_resource type="Resource" uid="uid://ccnhm50hxqfga" path="res://cards/items/lunta.tres" id="8_oe8jj"]
+[ext_resource type="PackedScene" uid="uid://dvjsli6hvr27" path="res://entities/house/player_entity.tscn" id="9_pojro"]
+[ext_resource type="Script" uid="uid://b0ctggu0ult2b" path="res://scenes/game_scene/card/card_drop_preview.gd" id="10_6mew0"]
+[ext_resource type="PackedScene" uid="uid://m3mm7ngil71s" path="res://scenes/utilities/safe_area_margin_container.tscn" id="10_gjaof"]
+[ext_resource type="PackedScene" uid="uid://xbm1xxnioo0u" path="res://scenes/game_scene/card/hand_ui.tscn" id="11_jdlv5"]
+[ext_resource type="PackedScene" uid="uid://c8deckviewui1" path="res://scenes/game_scene/card/deck_view_ui.tscn" id="12_aoe3c"]
+[ext_resource type="PackedScene" uid="uid://cs0hgm4wcbotb" path="res://levels/reward/reward_phase.tscn" id="13_1ha27"]
+[ext_resource type="Shader" uid="uid://de12vmk41fy1m" path="res://assets/shaders/water_background.gdshader" id="14_water"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_combat_water"]
+shader = ExtResource("14_water")
+shader_parameter/deep_color = Color(0.015, 0.08, 0.16, 1)
+shader_parameter/shallow_color = Color(0.04, 0.22, 0.32, 1)
+shader_parameter/wave_speed = 0.25
+shader_parameter/wave_scale = 8.0
+shader_parameter/wave_strength = 0.035
+shader_parameter/color_bands = 3
+
+[node name="CombatStage" type="Control" unique_id=235822082]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_nsbd3")
+next_level_path = "res://scenes/map/map_view.tscn"
+enemy_scene = ExtResource("2_1ha27")
+reward_card_pool = Array[ExtResource("3_6mew0")]([ExtResource("6_oe8jj"), ExtResource("4_dfy8o"), ExtResource("5_vi1cd"), ExtResource("7_vi1cd"), ExtResource("8_oe8jj")])
+
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=1389548597]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_combat_water")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TutorialManager" type="Node" parent="." unique_id=928060640]
+unique_name_in_owner = true
+script = ExtResource("7_0blov")
+tutorial_scenes = Array[PackedScene]([ExtResource("8_b4aor")])
+
+[node name="WorldViewportContainer" type="SubViewportContainer" parent="." unique_id=500000001]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+
+[node name="WorldViewport" type="SubViewport" parent="WorldViewportContainer" unique_id=500000002]
+unique_name_in_owner = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1600, 720)
+size_2d_override = Vector2i(200, 90)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="World" type="Node2D" parent="WorldViewportContainer/WorldViewport" unique_id=500000003]
+unique_name_in_owner = true
+texture_filter = 1
+
+[node name="Player" parent="WorldViewportContainer/WorldViewport/World" unique_id=1601606335 instance=ExtResource("9_pojro")]
+unique_name_in_owner = true
+
+[node name="SpawnPoints" type="Node2D" parent="WorldViewportContainer/WorldViewport/World" unique_id=732777320]
+unique_name_in_owner = true
+
+[node name="SpawnPoint1" type="Marker2D" parent="WorldViewportContainer/WorldViewport/World/SpawnPoints" unique_id=891739274]
+position = Vector2(14.375, -5.75)
+
+[node name="SpawnPoint2" type="Marker2D" parent="WorldViewportContainer/WorldViewport/World/SpawnPoints" unique_id=796509299]
+position = Vector2(41.875, -5.75)
+
+[node name="SpawnPoint3" type="Marker2D" parent="WorldViewportContainer/WorldViewport/World/SpawnPoints" unique_id=1166373639]
+position = Vector2(69.375, -5.75)
+
+[node name="DropPreview" type="Control" parent="." unique_id=2108424360]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_6mew0")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=2066036089]
+unique_name_in_owner = true
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=12315797]
+
+[node name="SafeAreaMarginContainer" parent="HUD" unique_id=1572284943 instance=ExtResource("10_gjaof")]
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/SafeAreaMarginContainer" unique_id=251823655]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 273.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/SafeAreaMarginContainer/MarginContainer" unique_id=1820157776]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HealthLabel" type="Label" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer" unique_id=1847131792]
+unique_name_in_owner = true
+layout_mode = 2
+text = "HP"
+
+[node name="ScrapLabel" type="Label" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer" unique_id=1744445825]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Scrap: 0"
+
+[node name="EnergyLabel" type="Label" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer" unique_id=1134466543]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Energy: 0"
+
+[node name="SlotLabel" type="Label" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer" unique_id=720124512]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Slots : 0/0"
+
+[node name="WaveLabel" type="Label" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer" unique_id=1148670224]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Wave 0/0"
+
+[node name="DeckLabel" type="Button" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer" unique_id=1847131793]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Deck: 0  Discard: 0"
+flat = true
+
+[node name="PhaseRow" type="HBoxContainer" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer" unique_id=1847131794]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PhaseLabel" type="Label" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer/PhaseRow" unique_id=1847131795]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Preparation Phase"
+vertical_alignment = 1
+
+[node name="PhaseButton" type="Button" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer/PhaseRow" unique_id=1847131796]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start Combat"
+
+[node name="HandArea" type="MarginContainer" parent="HUD/SafeAreaMarginContainer" unique_id=1847131797]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -180.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HandUI" parent="HUD/SafeAreaMarginContainer/HandArea" unique_id=1847131798 instance=ExtResource("11_jdlv5")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DragLayer" type="CanvasLayer" parent="." unique_id=1847131799]
+unique_name_in_owner = true
+layer = 10
+
+[node name="OverlayLayer" type="CanvasLayer" parent="." unique_id=603945408]
+layer = 20
+
+[node name="DeckViewUI" parent="OverlayLayer" unique_id=912361293 instance=ExtResource("12_aoe3c")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+
+[node name="RewardPhase" parent="OverlayLayer" unique_id=1701872980 instance=ExtResource("13_1ha27")]
+unique_name_in_owner = true
+visible = false
