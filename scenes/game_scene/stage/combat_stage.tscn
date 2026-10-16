@@ -48,8 +48,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1597.213
+offset_top = 6.98164e-05
+offset_right = 740.9851
+offset_bottom = 881.49976
 grow_horizontal = 2
 grow_vertical = 2
+rotation = 1.5707964
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
@@ -89,13 +94,13 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="SpawnPoint1" type="Marker2D" parent="WorldViewportContainer/WorldViewport/World/SpawnPoints" unique_id=891739274]
-position = Vector2(14.375, -5.75)
+position = Vector2(209.875, 48.125)
 
 [node name="SpawnPoint2" type="Marker2D" parent="WorldViewportContainer/WorldViewport/World/SpawnPoints" unique_id=796509299]
-position = Vector2(41.875, -5.75)
+position = Vector2(210.375, 65)
 
 [node name="SpawnPoint3" type="Marker2D" parent="WorldViewportContainer/WorldViewport/World/SpawnPoints" unique_id=1166373639]
-position = Vector2(69.375, -5.75)
+position = Vector2(210.25, 82.25)
 
 [node name="DropPreview" type="Control" parent="." unique_id=2108424360]
 unique_name_in_owner = true
@@ -129,31 +134,37 @@ theme_override_constants/separation = 8
 [node name="HealthLabel" type="Label" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer" unique_id=1847131792]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "HP"
 
 [node name="ScrapLabel" type="Label" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer" unique_id=1744445825]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Scrap: 0"
 
 [node name="EnergyLabel" type="Label" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer" unique_id=1134466543]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Energy: 0"
 
 [node name="SlotLabel" type="Label" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer" unique_id=720124512]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Slots : 0/0"
 
 [node name="WaveLabel" type="Label" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer" unique_id=1148670224]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Wave 0/0"
 
 [node name="DeckLabel" type="Button" parent="HUD/SafeAreaMarginContainer/MarginContainer/VBoxContainer" unique_id=1847131793]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Deck: 0  Discard: 0"
 flat = true
 
@@ -165,6 +176,7 @@ theme_override_constants/separation = 12
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 text = "Preparation Phase"
 vertical_alignment = 1
 

@@ -67,7 +67,7 @@ func _ready() -> void:
 		RenderSyncSystem.new(),
 	]
 	var viewport_size = world_viewport.get_visible_rect().size
-	player.position = Vector2(viewport_size.x/2, viewport_size.y - player_bottom_margin - hand_area_height)
+	player.position = Vector2(viewport_size.x/6, viewport_size.y/4 + viewport_size.y/6)
 
 	if combat_music:
 		ProjectMusicController.play_stream(combat_music)
