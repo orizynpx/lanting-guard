@@ -1,0 +1,10 @@
+views:
+  - type: table
+    name: View
+    filters:
+      and:
+        - file.inFolder("12 Items")
+        - file.hasProperty("energy")
+    order:
+      - file.name
+      - energy

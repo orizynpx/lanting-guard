@@ -1,0 +1,9 @@
+{
+	"nodes":[
+		{"id":"9dfba3b2c7b522c9","x":-220,"y":-60,"width":250,"height":60,"color":"3","type":"text","text":"How do we do this?"},
+		{"id":"3530bd1b800b6a7d","x":-95,"y":80,"width":400,"height":400,"type":"file","file":"41 Events/Ikan Terjerat.md"}
+	],
+	"edges":[
+		{"id":"eebfe045a8850447","fromNode":"9dfba3b2c7b522c9","fromSide":"bottom","toNode":"3530bd1b800b6a7d","toSide":"top"}
+	]
+}

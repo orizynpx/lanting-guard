@@ -1,0 +1,18 @@
+views:
+  - type: table
+    name: View
+    filters:
+      and:
+        - file.inFolder("03 Enemies")
+        - file.hasProperty("hp")
+    order:
+      - file.name
+      - hp
+      - speed
+      - special
+      - desc
+    sort:
+      - property: file.name
+        direction: DESC
+    columnSize:
+      note.hp: 187

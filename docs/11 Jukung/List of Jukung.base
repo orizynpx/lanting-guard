@@ -1,0 +1,27 @@
+properties:
+  file.name:
+    displayName: Jukung Name
+  note.hp:
+    displayName: HP
+  note.speed:
+    displayName: Speed Mult
+  note.description:
+    displayName: Short Description
+  note.desc:
+    displayName: Short Description
+views:
+  - type: table
+    name: View
+    filters:
+      and:
+        - file.inFolder("02 Jukung")
+        - file.hasProperty("hp")
+    order:
+      - file.name
+      - hp
+      - damage
+      - attack_speed
+      - desc
+    sort:
+      - property: file.name
+        direction: ASC
